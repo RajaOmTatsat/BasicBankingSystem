@@ -14,8 +14,7 @@ Basic-Banking-System/
         └── demo.png
 📝 README.md Template
 markdown
-Copy
-Edit
+
 # 💰 Basic Banking System
 
 A command-line based Banking System implemented in Java, applying core Object-Oriented Programming principles. It allows users to manage Savings and Current accounts with deposit, withdrawal, balance inquiry, and interest/overdraft functionalities.
@@ -51,9 +50,7 @@ src/
 ├── CurrentAccount.java
 └── BankSystemDemo.java
 
-yaml
-Copy
-Edit
+
 
 ---
 
@@ -72,9 +69,7 @@ Edit
 javac src/*.java
 Run the application:
 
-bash
-Copy
-Edit
+
 java src.BankSystemDemo
 🗃️ Database Design (For Future Enhancement)
 Table: accounts
@@ -98,8 +93,7 @@ timestamp	DATETIME	Auto timestamp
 Add a CLI screenshot or mock GUI:
 
 markdown
-Copy
-Edit
+
 Welcome to Basic Banking System
 1. Deposit
 2. Withdraw
@@ -147,6 +141,6 @@ Edit
 ```text
 MIT License
 
-Copyright (c) 2025 [Your Name]
+Copyright (c) 2025 [RajaOmTatsat]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy...
