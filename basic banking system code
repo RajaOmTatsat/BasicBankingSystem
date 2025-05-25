@@ -1,0 +1,93 @@
+// Base class for all accounts
+class BankAccount {
+    private String accountNumber;
+    private String accountHolderName;
+    protected double balance;
+
+    public BankAccount(String accountNumber, String accountHolderName, double initialBalance) {
+        this.accountNumber = accountNumber;
+        this.accountHolderName = accountHolderName;
+        this.balance = initialBalance;
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+            System.out.println("Deposited ₹" + amount + ". New Balance: ₹" + balance);
+        } else {
+            System.out.println("Invalid deposit amount.");
+        }
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn ₹" + amount + ". Remaining Balance: ₹" + balance);
+        } else {
+            System.out.println("Insufficient funds or invalid amount.");
+        }
+    }
+
+    public void checkBalance() {
+        System.out.println("Current Balance: ₹" + balance);
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+}
+
+// SavingsAccount with interest and no overdraft
+class SavingsAccount extends BankAccount {
+    private double interestRate = 0.04; // 4% annual interest
+
+    public SavingsAccount(String accountNumber, String accountHolderName, double initialBalance) {
+        super(accountNumber, accountHolderName, initialBalance);
+    }
+
+    public void addInterest() {
+        double interest = balance * interestRate;
+        deposit(interest);
+        System.out.println("Interest of ₹" + interest + " added.");
+    }
+}
+
+// CurrentAccount with overdraft limit
+class CurrentAccount extends BankAccount {
+    private double overdraftLimit = 5000;
+
+    public CurrentAccount(String accountNumber, String accountHolderName, double initialBalance) {
+        super(accountNumber, accountHolderName, initialBalance);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (amount > 0 && (balance + overdraftLimit) >= amount) {
+            balance -= amount;
+            System.out.println("Withdrawn ₹" + amount + ". New Balance: ₹" + balance);
+        } else {
+            System.out.println("Overdraft limit exceeded or invalid amount.");
+        }
+    }
+}
+public class BankSystemDemo {
+    public static void main(String[] args) {
+        SavingsAccount savings = new SavingsAccount("S1001", "Alice", 5000);
+        CurrentAccount current = new CurrentAccount("C1001", "Bob", 2000);
+
+        System.out.println("Savings Account - " + savings.getAccountHolderName());
+        savings.deposit(1000);
+        savings.withdraw(2000);
+        savings.addInterest();
+        savings.checkBalance();
+
+        System.out.println("\nCurrent Account - " + current.getAccountHolderName());
+        current.deposit(1500);
+        current.withdraw(8000); // allowed due to overdraft
+        current.checkBalance();
+    }
+}
